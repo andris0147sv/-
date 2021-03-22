@@ -1,11 +1,17 @@
 import matplotlib.pyplot as plt
 import math
+import os.path
 import numpy as np
 def frange(x, y, jump):
     while x < y:
         yield x
         x += jump
-with open('results.txt', 'w') as f:
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname,'results')
+if os.path.exists(filename)==False:
+    os.mkdir(filename)
+filename = os.path.join(filename, 'results.txt')
+with open(filename, 'w') as f:
     xres = []
     fres = []
     for x in frange(-5.12, 5.12, 0.1):
@@ -14,7 +20,7 @@ with open('results.txt', 'w') as f:
         xres.append('%.4f' % x)
         fres.append('%.4f' % function)
     for i in range(len(xres)):
-       f.write(str(xres[i])+"  "+str(fres[i])+"\n")
+       f.write(str(xres[i])+"    "+str(fres[i])+"\n")
     fig = plt.figure()
     ax = fig.add_subplot(111)
     xres = list(map(float, xres))
