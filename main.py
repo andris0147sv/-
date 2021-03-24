@@ -8,7 +8,7 @@ def frange(x, y, jump):
         x += jump
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname,'results')
-if os.path.exists(filename)==False:
+if not os.path.exists(filename):
     os.mkdir(filename)
 filename = os.path.join(filename, 'results.txt')
 with open(filename, 'w') as f:
@@ -23,6 +23,7 @@ with open(filename, 'w') as f:
        f.write(str(xres[i])+"    "+str(fres[i])+"\n")
     fig = plt.figure()
     ax = fig.add_subplot(111)
+    #преобразуем все значения из строковых, в значения с плавающей запятой
     xres = list(map(float, xres))
     fres = list(map(float, fres))
     ax.set_xticks(np.arange(-5.12, 5.12, 1 ))
